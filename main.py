@@ -6,14 +6,14 @@ pygame.init()
 
 
 # Константы
-WIDTH = 700
-HEIGHT = 500
+WIDTH = 800
+HEIGHT = 600
 FPS = 60
 
 
 # Создание окна
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Dino Chrome")
+pygame.display.set_caption("TOD")
 clock = pygame.time.Clock()
 
 
