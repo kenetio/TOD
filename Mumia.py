@@ -13,8 +13,8 @@ class Tile(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-    def update(self, rect):
-        if left:
+    def update(self, rectplayer):
+        if rectplayer.y:
             self.xvel -= 1
         if right:
             self.xvel += 1
