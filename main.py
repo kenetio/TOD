@@ -20,7 +20,12 @@ clock = pygame.time.Clock()
 
 # Спрайты
 player = Player((200, 200))
+roomimg = pygame.image.load(f"image/комната .png")
 
+u = False
+r = False
+d = False
+l = False
 
 
 running = True
@@ -28,15 +33,33 @@ while running:
     # Частота обновления экрана
     clock.tick(FPS)
 
-
-    # События/Events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        elif i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_a:
+                l = True
+            elif i.key == pygame.K_d:
+                r = True
+            elif i.key == pygame.K_w:
+                d = True
+            elif i.key == pygame.K_s:
+                u = True
+        elif i.type == pygame.KEYUP:
+            if i.key == pygame.K_a:
+                l = False
+            elif i.key == pygame.K_d:
+                r = False
+            elif i.key == pygame.K_w:
+                d = False
+            elif i.key == pygame.K_s:
+                u = False
+
 
 
     # Рендеринг
+    screen.blit(roomimg, (0, 0))
     player.draw(screen)
     pygame.display.update()
 
@@ -44,7 +67,7 @@ while running:
 
 
     # Обновление спрайтов
-    player.update(0, 0, 1, 0)
+    player.update(u, d, l, r)
 
 
 
