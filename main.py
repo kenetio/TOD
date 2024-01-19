@@ -13,7 +13,7 @@ FPS = 60
 
 # Создание окна
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("TOD")
+pygame.display.set_caption("Dino Chrome")
 clock = pygame.time.Clock()
 
 
