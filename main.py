@@ -1,5 +1,6 @@
 import pygame
 import sys
+from player import Player
 
 
 pygame.init()
@@ -18,7 +19,7 @@ clock = pygame.time.Clock()
 
 
 # Спрайты
-
+player = Player((200, 200))
 
 
 
@@ -36,12 +37,14 @@ while running:
 
 
     # Рендеринг
+    player.draw(screen)
+    pygame.display.update()
 
 
 
 
     # Обновление спрайтов
-
+    player.update(0, 0, 1, 0)
 
 
 
