@@ -1,6 +1,7 @@
 import pygame
 import sys
 from player import Player
+from Mumia import mymia
 
 
 pygame.init()
@@ -21,6 +22,7 @@ clock = pygame.time.Clock()
 # Спрайты
 player = Player((200, 200))
 roomimg = pygame.image.load(f"image/комната .png")
+pygame.mixer.music.load("music.mp3")
 
 u = False
 r = False
@@ -28,7 +30,7 @@ d = False
 l = False
 
 temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
-
+mymy = mymia(500, 500)
 
 for i in temple:
     pass
@@ -36,6 +38,8 @@ for i in temple:
 for i in temple:
     print(*i)
 
+
+pygame.mixer.music.play(-1)
 running = True
 while running:
     # Частота обновления экрана
@@ -69,6 +73,7 @@ while running:
     # Рендеринг
     screen.blit(roomimg, (0, 0))
     player.draw(screen)
+    mymy.draw(screen)
     pygame.display.update()
 
 
@@ -76,6 +81,7 @@ while running:
 
     # Обновление спрайтов
     player.update(u, d, l, r)
+    mymy.update(player.rect)
 
 
 

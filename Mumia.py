@@ -5,7 +5,7 @@ import math
 
 class mymia(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        pygame.sprite.Sprite.__init__()
+        super().__init__()
         self.image = pygame.image.load(f"image/Мумия.png")
         self.original_image = pygame.image.load(f"image/Мумия.png")
         self.rect = pygame.Rect(x, y, 150, 150)
@@ -16,17 +16,19 @@ class mymia(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-    def update(self, rectplayer, bulletrect):
+    def update(self, rectplayer):
         if rectplayer.y < self.rect.y:
             self.yvel -= 1
-        elif rectplayer.y > self.rect.y:
+        if rectplayer.y > self.rect.y:
             self.yvel += 1
-        elif rectplayer.x < self.rect.x:
+        if rectplayer.x < self.rect.x:
             self.xvel -= 1
-        elif rectplayer.x > self.rect.x:
+        if rectplayer.x > self.rect.x:
             self.xvel += 1
-        else:
-            pass
+        self.rect.x += self.xvel
+        self.rect.y += self.yvel
+        self.yvel = 0
+        self.xvel = 0
         mouse_x, mouse_y = rectplayer.center
         rel_x, rel_y = mouse_x - self.rect.x, mouse_y - self.rect.y
         angle = (180 / math.pi) * -math.atan2(rel_y, rel_x)
