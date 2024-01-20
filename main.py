@@ -4,6 +4,7 @@ from player import Player
 from Mumia import mymia
 from Yasher import yasher
 from test_file import bullet
+from blood import blood
 import math
 
 
@@ -48,14 +49,14 @@ walls = [wallrect1, wallrect2, wallrect3, wallrect4]
 
 enemys = []
 
-
+bloodys = []
 
 u = False
 r = False
 d = False
 l = False
 
-temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
+
 mymy = mymia((500, 500))
 mymy1 = mymia((300, 500))
 asher = yasher((700, 700))
@@ -68,11 +69,6 @@ enemys.append(ashetr)
 
 bullets = []
 
-for i in temple:
-    pass
-
-for i in temple:
-    print(*i)
 
 flag = False
 
@@ -118,15 +114,18 @@ while running:
 
 
     screen.blit(roomimg, (0, 0))
-    pygame.draw.rect(screen, (0, 0, 0),
-                     (0, 0, 140, 60))
-    pygame.draw.rect(screen, (255, 0, 0),
-                     (10, 10, 20+player.hp, 40))
+    for i in bloodys:
+        i.draw(screen)
     for i in bullets:
         i.draw(screen)
     player.draw(screen)
     for i in enemys:
         i.draw(screen)
+
+    pygame.draw.rect(screen, (0, 0, 0),
+                     (0, 0, 140, 60))
+    pygame.draw.rect(screen, (255, 0, 0),
+                     (10, 10, 20+player.hp, 40))
     if damagetime > 0:
         screen.blit(damageimage, (0, 0))
     pygame.display.update()
@@ -138,6 +137,8 @@ while running:
     player.update(u, d, l, r, walls)
     for i in enemys:
         if i.check():
+            bloodik = blood(i.rect.topleft)
+            bloodys.append(bloodik)
             enemys.remove(i)
         i.update(player.rect, bullets)
         if i.t == True:
