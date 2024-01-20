@@ -40,6 +40,8 @@ wall4 = pygame.image.load(f"image/Walls/Wall4.png")
 wallrect4 = wall4.get_rect()
 wallrect4.topleft = (0,577)
 
+gm = pygame.image.load(f"image/game over.png")
+
 damageimage = pygame.image.load(f"image/урон.png")
 
 walls = [wallrect1, wallrect2, wallrect3, wallrect4]
@@ -113,7 +115,13 @@ while running:
 
 
     # Рендеринг
+
+
     screen.blit(roomimg, (0, 0))
+    pygame.draw.rect(screen, (0, 0, 0),
+                     (0, 0, 140, 60))
+    pygame.draw.rect(screen, (255, 0, 0),
+                     (10, 10, 20+player.hp, 40))
     for i in bullets:
         i.draw(screen)
     player.draw(screen)
@@ -150,6 +158,23 @@ while running:
         damagetime = 100
         flag = False
 
+    if player.hp <= 0:
+        running = False
+
     damagetime -= 1
+
+    # Обновление экрана
+running = True
+while running:
+    # Частота обновления экрана
+    clock.tick(FPS)
+
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+    screen.blit(gm, (0,0))
+    pygame.display.update()
 
     # Обновление экрана
