@@ -3,11 +3,11 @@ from pygame.transform import scale
 import math
 
 
-class mymia(pygame.sprite.Sprite):
+class Yasher(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load(f"image/Мумия.png")
-        self.original_image = pygame.image.load(f"image/Мумия.png")
+        self.image = pygame.image.load(f"image/ящер против руса.png")
+        self.original_image = pygame.image.load(f"image/ящер против руса.png")
         self.collideimage = pygame.image.load(f"image/collideplayer.png")
         self.rect = pygame.Rect(x, y, 100, 100)
         self.xvel = 0

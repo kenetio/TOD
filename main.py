@@ -2,6 +2,7 @@ import pygame
 import sys
 from player import Player
 from Mumia import mymia
+from Yasher import Yasher
 
 
 pygame.init()
@@ -37,7 +38,10 @@ wall4 = pygame.image.load(f"image/Walls/Wall4.png")
 wallrect4 = wall4.get_rect()
 wallrect4.topleft = (0,577)
 
+damageimage = pygame.image.load(f"image/урон.png")
+
 walls = [wallrect1, wallrect2, wallrect3, wallrect4]
+
 
 u = False
 r = False
@@ -46,6 +50,7 @@ l = False
 
 temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
 mymy = mymia(500, 500)
+yasher = Yasher(300, 300)
 
 for i in temple:
     pass
@@ -53,7 +58,7 @@ for i in temple:
 for i in temple:
     print(*i)
 
-
+damagetime = 0
 pygame.mixer.music.play(-1)
 running = True
 while running:
@@ -89,6 +94,9 @@ while running:
     screen.blit(roomimg, (0, 0))
     player.draw(screen)
     mymy.draw(screen)
+    yasher.draw(screen)
+    if damagetime > 0:
+        screen.blit(damageimage, (0, 0))
     pygame.display.update()
 
 
@@ -97,7 +105,17 @@ while running:
     # Обновление спрайтовw
     player.update(u, d, l, r, walls)
     mymy.update(player.rect)
+    if mymy.checkolide(player.colliderect) and damagetime < 0:
+        player.hp -= 10
+        print(player.hp)
+        damagetime = 100
 
+    yasher.update(player.rect)
+    if yasher.checkolide(player.colliderect) and damagetime < 0:
+        player.hp -= 5
+        print(player.hp)
+        damagetime = 100
 
+    damagetime -= 1
 
     # Обновление экрана

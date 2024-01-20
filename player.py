@@ -13,6 +13,7 @@ class Player(pygame.sprite.Sprite):
         x, y = coords
         self.rect.topleft = (x, y)
         self.colliderect.topleft = (x+28, y+28)
+        self.hp = 100
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -23,29 +24,29 @@ class Player(pygame.sprite.Sprite):
             self.colliderect.y += 3
             for i in walls:
                 if self.colliderect.colliderect(i):
-                    self.rect.y -= 5
-                    self.colliderect.y -= 5
+                    self.rect.y -= 3
+                    self.colliderect.y -= 3
         if d:
             self.rect.y -= 3
             self.colliderect.y -= 3
             for i in walls:
                 if self.colliderect.colliderect(i):
-                    self.rect.y += 5
-                    self.colliderect.y += 5
+                    self.rect.y += 3
+                    self.colliderect.y += 3
         if l:
             self.rect.x -= 3
             self.colliderect.x -= 3
             for i in walls:
                 if self.colliderect.colliderect(i):
-                    self.rect.x += 5
-                    self.colliderect.x += 5
+                    self.rect.x += 3
+                    self.colliderect.x += 3
         if r:
             self.rect.x += 3
             self.colliderect.x += 3
             for i in walls:
                 if self.colliderect.colliderect(i):
-                    self.rect.x -= 5
-                    self.colliderect.x -= 5
+                    self.rect.x -= 3
+                    self.colliderect.x -= 3
 
         mouse_x, mouse_y = pygame.mouse.get_pos()
         rel_x, rel_y = mouse_x - self.rect.x, mouse_y - self.rect.y
