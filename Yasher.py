@@ -3,39 +3,33 @@ from pygame.transform import scale
 import math
 
 
-class mymia(pygame.sprite.Sprite):
-    def __init__(self, coords):
+class Yasher(pygame.sprite.Sprite):
+    def __init__(self, x, y):
         super().__init__()
-        self.image = pygame.image.load(f"image/Мумия.png")
-        self.original_image = pygame.image.load(f"image/Мумия.png")
+        self.image = pygame.image.load(f"image/ящер против руса.png")
+        self.original_image = pygame.image.load(f"image/ящер против руса.png")
         self.collideimage = pygame.image.load(f"image/collideplayer.png")
         self.rect = pygame.Rect(x, y, 100, 100)
         self.xvel = 0
         self.yvel = 0
-        self.life = 5
+        self.life = 3
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
         self.hp = 100
-        self.type = "mymia"
-        print(self.image)
+        self.type = "yasher"
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-    def update(self, rectplayer, bullet):
+    def update(self, rectplayer):
         if rectplayer.y < self.rect.y:
-            self.yvel -= 1
+            self.yvel -= 2
         if rectplayer.y > self.rect.y:
-            self.yvel += 1
+            self.yvel += 2
         if rectplayer.x < self.rect.x:
-            self.xvel -= 1
+            self.xvel -= 2
         if rectplayer.x > self.rect.x:
-            self.xvel += 1
-        if self.rect.colliderect(bullet.rect):
-            self.life -= 1
-        if self.life == 0:
-            self.kill()
-
+            self.xvel += 2
         self.rect.x += self.xvel
         self.rect.y += self.yvel
         self.colliderect.x += self.xvel
