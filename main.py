@@ -6,10 +6,10 @@ from Yasher import yasher
 from test_file import bullet
 from blood import blood
 import math
-from random import randint
 
 
 pygame.init()
+
 
 # Константы
 WIDTH = 800
@@ -21,12 +21,6 @@ FPS = 60
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("TOD")
 clock = pygame.time.Clock()
-
-
-# Спрайты
-player = Player((200, 200))
-roomimg = pygame.image.load(f"image/комната .png")
-pygame.mixer.music.load("music.mp3")
 
 wall1 = pygame.image.load(f"image/Walls/Wall1.png")
 wallrect1 = wall1.get_rect()
@@ -40,6 +34,15 @@ wallrect3.topleft = (778,0)
 wall4 = pygame.image.load(f"image/Walls/Wall4.png")
 wallrect4 = wall4.get_rect()
 wallrect4.topleft = (0,577)
+
+# Спрайты
+pygame.mixer.music.load("music.mp3")
+player = Player((200, 200))
+def room():
+
+    roomimg = pygame.image.load(f"image/комната .png")
+    screen.blit(roomimg, (0, 0))
+
 
 gm = pygame.image.load(f"image/game over.png")
 
@@ -56,12 +59,16 @@ r = False
 d = False
 l = False
 
-room = [0, 0, 0, 0]
 
 mymy = mymia((500, 500))
 mymy1 = mymia((300, 500))
 asher = yasher((700, 700))
 ashetr = yasher((100, 400))
+
+enemys.append(mymy)
+enemys.append(mymy1)
+enemys.append(asher)
+enemys.append(ashetr)
 
 bullets = []
 
@@ -108,8 +115,7 @@ while running:
 
     # Рендеринг
 
-
-    screen.blit(roomimg, (0, 0))
+    room()
     for i in bloodys:
         i.draw(screen)
     for i in bullets:
@@ -130,9 +136,6 @@ while running:
 
 
     # Обновление спрайтов
-
-
-
     player.update(u, d, l, r, walls)
     for i in enemys:
         if i.check():
@@ -168,13 +171,3 @@ running = True
 while running:
     # Частота обновления экрана
     clock.tick(FPS)
-
-    for i in pygame.event.get():
-        if i.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-    screen.blit(gm, (0,0))
-    pygame.display.update()
-
-    # Обновление экрана
