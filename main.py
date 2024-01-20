@@ -11,29 +11,6 @@ from random import randint
 
 pygame.init()
 
-def newroom():
-    global walls, wall1, wall2, wall3, wall4, wallrect1, wallrect2, wallrect3, wallrect4, enemys, player
-    wall1 = pygame.image.load(f"image/Walls/Wall1.png")
-    wallrect1 = wall1.get_rect()
-    wallrect1.topleft = (0, 0)
-    wall2 = pygame.image.load(f"image/Walls/Wall2.png")
-    wallrect2 = wall2.get_rect()
-    wallrect2.topleft = (0, 0)
-    wall3 = pygame.image.load(f"image/Walls/Wall3.png")
-    wallrect3 = wall3.get_rect()
-    wallrect3.topleft = (778, 0)
-    wall4 = pygame.image.load(f"image/Walls/Wall4.png")
-    wallrect4 = wall4.get_rect()
-    wallrect4.topleft = (0, 577)
-    walls = [wallrect1, wallrect3, wallrect4]
-    for i in range(randint(0, 5)):
-        f = mymia((randint(50,750), randint(50,300)))
-        enemys.append(f)
-    for i in range(randint(0, 3)):
-        f = yasher((randint(50,750), randint(50,300)))
-        enemys.append(f)
-    player.rect.center = (400, 500)
-
 # Константы
 WIDTH = 800
 HEIGHT = 600
@@ -48,7 +25,7 @@ clock = pygame.time.Clock()
 
 # Спрайты
 player = Player((200, 200))
-roomimg = pygame.image.load(f"image/комната начальная.png")
+roomimg = pygame.image.load(f"image/комната .png")
 pygame.mixer.music.load("music.mp3")
 
 wall1 = pygame.image.load(f"image/Walls/Wall1.png")
@@ -64,13 +41,11 @@ wall4 = pygame.image.load(f"image/Walls/Wall4.png")
 wallrect4 = wall4.get_rect()
 wallrect4.topleft = (0,577)
 
-walls = [wallrect1, wallrect3, wallrect4]
-
 gm = pygame.image.load(f"image/game over.png")
 
 damageimage = pygame.image.load(f"image/урон.png")
 
-walls = [wallrect1, wallrect3, wallrect4]
+walls = [wallrect1, wallrect2, wallrect3, wallrect4]
 
 enemys = []
 
@@ -128,9 +103,6 @@ while running:
             bulle = bullet(player.rect.centerx, player.rect.centery, playerDirection-180)
             bullets.append(bulle)
 
-        if player.rect.centery < 0:
-            newroom()
-
 
 
 
@@ -172,9 +144,9 @@ while running:
             bullets.pop(i.hit)
         if i.checkolide(player.colliderect) and damagetime < 0:
             if i.type == "mymia":
-                player.hp -= 20
-            else:
                 player.hp -= 10
+            else:
+                player.hp -= 5
             print(player.hp)
             flag = True
     for i in bullets:
