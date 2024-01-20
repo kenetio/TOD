@@ -3,9 +3,10 @@ from pygame.transform import scale
 import math
 
 
-class Yasher(pygame.sprite.Sprite):
-    def __init__(self, x, y):
+class yasher(pygame.sprite.Sprite):
+    def __init__(self, coords):
         super().__init__()
+        x, y = coords
         self.image = pygame.image.load(f"image/ящер против руса.png")
         self.original_image = pygame.image.load(f"image/ящер против руса.png")
         self.collideimage = pygame.image.load(f"image/collideplayer.png")
@@ -15,10 +16,10 @@ class Yasher(pygame.sprite.Sprite):
         self.life = 3
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
-        self.hp = 100
         self.type = "yasher"
 
     def draw(self, surface):
+        surface.blit(self.image, self.rect)
         surface.blit(self.image, self.rect)
 
     def update(self, rectplayer, bullets):
@@ -31,11 +32,10 @@ class Yasher(pygame.sprite.Sprite):
         if rectplayer.x > self.rect.x:
             self.xvel += 2
         for bullet in bullets:
-            if self.rect.colliderect(bullet.rect):
+            if self.colliderect.colliderect(bullet.rect):
                 self.life -= 1
-                print(self.life)
-        if self.life <= 0:
-            self.kill()
+
+
         self.rect.x += self.xvel
         self.rect.y += self.yvel
         self.colliderect.x += self.xvel
@@ -51,6 +51,12 @@ class Yasher(pygame.sprite.Sprite):
 
     def checkolide(self, rect):
         if self.colliderect.colliderect(rect):
+            return True
+        else:
+            return False
+
+    def check(self):
+        if self.life <= 0:
             return True
         else:
             return False

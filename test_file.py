@@ -13,6 +13,7 @@ class bullet(pygame.sprite.Sprite):
         self.image = pygame.transform.rotate(self.image, self.angle)
         self.rect = self.image.get_rect(center=self.rect.center)
 
+
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
@@ -22,3 +23,10 @@ class bullet(pygame.sprite.Sprite):
         self.yvel += math.sin(degrees)
         self.rect.x += self.xvel
         self.rect.y += self.yvel
+
+    def check(self, bullets):
+        for bullet in bullets:
+            if self.rect.colliderect(bullet.rect):
+                return True
+            else:
+                return False

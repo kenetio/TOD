@@ -2,7 +2,7 @@ import pygame
 import sys
 from player import Player
 from Mumia import mymia
-from Yasher import Yasher
+from Yasher import yasher
 from test_file import bullet
 import math
 
@@ -56,11 +56,11 @@ l = False
 temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
 mymy = mymia((500, 500))
 mymy1 = mymia((300, 500))
-yasher = Yasher(300, 300)
+asher = yasher((700, 700))
 
 enemys.append(mymy)
 enemys.append(mymy1)
-enemys.append(yasher)
+enemys.append(asher)
 
 bullets = []
 
@@ -127,6 +127,8 @@ while running:
     # Обновление спрайтовw
     player.update(u, d, l, r, walls)
     for i in enemys:
+        if i.check():
+            enemys.remove(i)
         i.update(player.rect, bullets)
         if i.checkolide(player.colliderect) and damagetime < 0:
             if i.type == "mymia":
@@ -136,6 +138,9 @@ while running:
             print(player.hp)
             flag = True
     for i in bullets:
+
+        if i.check(enemys):
+            bullets.remove(i)
         i.update()
     if flag == True:
         damagetime = 100

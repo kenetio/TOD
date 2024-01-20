@@ -16,9 +16,7 @@ class mymia(pygame.sprite.Sprite):
         self.life = 5
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
-        self.hp = 100
         self.type = "mymia"
-        print(self.image)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -35,8 +33,7 @@ class mymia(pygame.sprite.Sprite):
         for bullet in bullets:
             if self.rect.colliderect(bullet.rect):
                 self.life -= 1
-        if self.life <= 0:
-            self.kill()
+
 
         self.rect.x += self.xvel
         self.rect.y += self.yvel
@@ -53,6 +50,12 @@ class mymia(pygame.sprite.Sprite):
 
     def checkolide(self, rect):
         if self.colliderect.colliderect(rect):
+            return True
+        else:
+            return False
+
+    def check(self):
+        if self.life <= 0:
             return True
         else:
             return False
