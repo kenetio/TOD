@@ -13,7 +13,7 @@ class mymia(pygame.sprite.Sprite):
         self.rect = pygame.Rect(x, y, 100, 100)
         self.xvel = 0
         self.yvel = 0
-        self.life = 5
+        self.life = 10
         self.hit = 0
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)

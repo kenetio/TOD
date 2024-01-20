@@ -13,7 +13,7 @@ class yasher(pygame.sprite.Sprite):
         self.rect = pygame.Rect(x, y, 100, 100)
         self.xvel = 0
         self.yvel = 0
-        self.life = 3
+        self.life = 5
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
         self.type = "yasher"
