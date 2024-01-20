@@ -6,6 +6,7 @@ import math
 class mymia(pygame.sprite.Sprite):
     def __init__(self, coords):
         super().__init__()
+        x, y = coords
         self.image = pygame.image.load(f"image/Мумия.png")
         self.original_image = pygame.image.load(f"image/Мумия.png")
         self.collideimage = pygame.image.load(f"image/collideplayer.png")
@@ -22,7 +23,7 @@ class mymia(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-    def update(self, rectplayer, bullet):
+    def update(self, rectplayer, bullets):
         if rectplayer.y < self.rect.y:
             self.yvel -= 1
         if rectplayer.y > self.rect.y:
@@ -31,9 +32,10 @@ class mymia(pygame.sprite.Sprite):
             self.xvel -= 1
         if rectplayer.x > self.rect.x:
             self.xvel += 1
-        if self.rect.colliderect(bullet.rect):
-            self.life -= 1
-        if self.life == 0:
+        for bullet in bullets:
+            if self.rect.colliderect(bullet.rect):
+                self.life -= 1
+        if self.life <= 0:
             self.kill()
 
         self.rect.x += self.xvel

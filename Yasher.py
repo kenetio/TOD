@@ -21,7 +21,7 @@ class Yasher(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-    def update(self, rectplayer):
+    def update(self, rectplayer, bullets):
         if rectplayer.y < self.rect.y:
             self.yvel -= 2
         if rectplayer.y > self.rect.y:
@@ -30,6 +30,12 @@ class Yasher(pygame.sprite.Sprite):
             self.xvel -= 2
         if rectplayer.x > self.rect.x:
             self.xvel += 2
+        for bullet in bullets:
+            if self.rect.colliderect(bullet.rect):
+                self.life -= 1
+                print(self.life)
+        if self.life <= 0:
+            self.kill()
         self.rect.x += self.xvel
         self.rect.y += self.yvel
         self.colliderect.x += self.xvel

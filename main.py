@@ -3,6 +3,8 @@ import sys
 from player import Player
 from Mumia import mymia
 from Yasher import Yasher
+from test_file import bullet
+import math
 
 
 pygame.init()
@@ -52,13 +54,15 @@ d = False
 l = False
 
 temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
-mymy = mymia(500, 500)
-mymy1 = mymia(300, 500)
+mymy = mymia((500, 500))
+mymy1 = mymia((300, 500))
 yasher = Yasher(300, 300)
 
 enemys.append(mymy)
 enemys.append(mymy1)
 enemys.append(yasher)
+
+bullets = []
 
 for i in temple:
     pass
@@ -97,11 +101,19 @@ while running:
                 d = False
             elif i.key == pygame.K_s:
                 u = False
+        elif i.type == pygame.MOUSEBUTTONDOWN:
+            pos = (pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1])
+            playerDirection = math.degrees(math.atan2(player.rect.y-pos[1], player.rect.x-pos[0]))
+            bulle = bullet(player.rect.centerx, player.rect.centery, playerDirection-180)
+            bullets.append(bulle)
+
 
 
 
     # Рендеринг
     screen.blit(roomimg, (0, 0))
+    for i in bullets:
+        i.draw(screen)
     player.draw(screen)
     for i in enemys:
         i.draw(screen)
@@ -115,7 +127,7 @@ while running:
     # Обновление спрайтовw
     player.update(u, d, l, r, walls)
     for i in enemys:
-        i.update(player.rect)
+        i.update(player.rect, bullets)
         if i.checkolide(player.colliderect) and damagetime < 0:
             if i.type == "mymia":
                 player.hp -= 10
@@ -123,6 +135,8 @@ while running:
                 player.hp -= 5
             print(player.hp)
             flag = True
+    for i in bullets:
+        i.update()
     if flag == True:
         damagetime = 100
         flag = False
