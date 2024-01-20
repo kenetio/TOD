@@ -27,12 +27,14 @@ r = False
 d = False
 l = False
 
-temple = [[], [], [], [], [], [], [], [], []]
-
-for i in temple():
+temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
 
 
-print(temple)
+for i in temple:
+    pass
+
+for i in temple:
+    print(*i)
 
 running = True
 while running:
