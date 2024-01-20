@@ -14,9 +14,11 @@ class mymia(pygame.sprite.Sprite):
         self.xvel = 0
         self.yvel = 0
         self.life = 5
+        self.hit = 0
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
         self.type = "mymia"
+        self.t = False
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -30,9 +32,14 @@ class mymia(pygame.sprite.Sprite):
             self.xvel -= 1
         if rectplayer.x > self.rect.x:
             self.xvel += 1
+        self.hit = -1
+        self.t = False
         for bullet in bullets:
+            self.hit += 1
             if self.rect.colliderect(bullet.rect):
                 self.life -= 1
+                self.t = True
+                break
 
 
         self.rect.x += self.xvel

@@ -57,10 +57,12 @@ temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,
 mymy = mymia((500, 500))
 mymy1 = mymia((300, 500))
 asher = yasher((700, 700))
+ashetr = yasher((100, 400))
 
 enemys.append(mymy)
 enemys.append(mymy1)
 enemys.append(asher)
+enemys.append(ashetr)
 
 bullets = []
 
@@ -124,12 +126,14 @@ while running:
 
 
 
-    # Обновление спрайтовw
+    # Обновление спрайтов
     player.update(u, d, l, r, walls)
     for i in enemys:
         if i.check():
             enemys.remove(i)
         i.update(player.rect, bullets)
+        if i.t == True:
+            bullets.pop(i.hit)
         if i.checkolide(player.colliderect) and damagetime < 0:
             if i.type == "mymia":
                 player.hp -= 10
