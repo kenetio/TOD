@@ -3,7 +3,7 @@ from pygame.transform import scale
 import math
 
 
-class mymia(pygame.sprite.Sprite):
+class mymiaa(pygame.sprite.Sprite):
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__()
         self.image = pygame.image.load(f"image/Мумия.png")
