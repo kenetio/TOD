@@ -15,7 +15,7 @@ FPS = 60
 
 # Создание окна
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Dino Chrome")
+pygame.display.set_caption("TOD")
 clock = pygame.time.Clock()
 
 
@@ -23,6 +23,15 @@ clock = pygame.time.Clock()
 player = Player((200, 200))
 roomimg = pygame.image.load(f"image/комната .png")
 pygame.mixer.music.load("music.mp3")
+
+wall1 = pygame.image.load(f"image/Walls/Wall1.png")
+wallrect1 = wall1.get_rect()
+wall2 = pygame.image.load(f"image/Walls/Wall1.png")
+wallrect2 = pygame.Rect(0, 0, 150, 150)
+wall3 = pygame.image.load(f"image/Walls/Wall1.png")
+wallrect3 = pygame.Rect(0, 0, 150, 150)
+wall4 = pygame.image.load(f"image/Walls/Wall1.png")
+wallrect4 = pygame.Rect(0, 0, 150, 150)
 
 u = False
 r = False

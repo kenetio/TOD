@@ -8,7 +8,7 @@ class mymia(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load(f"image/Мумия.png")
         self.original_image = pygame.image.load(f"image/Мумия.png")
-        self.rect = pygame.Rect(x, y, 150, 150)
+        self.rect = pygame.Rect(x, y, 100, 100)
         self.xvel = 0
         self.yvel = 0
         self.life = 5
