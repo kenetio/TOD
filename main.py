@@ -42,6 +42,9 @@ damageimage = pygame.image.load(f"image/урон.png")
 
 walls = [wallrect1, wallrect2, wallrect3, wallrect4]
 
+enemys = []
+
+
 
 u = False
 r = False
@@ -50,13 +53,20 @@ l = False
 
 temple = [[0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,3,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0]]
 mymy = mymia(500, 500)
+mymy1 = mymia(300, 500)
 yasher = Yasher(300, 300)
+
+enemys.append(mymy)
+enemys.append(mymy1)
+enemys.append(yasher)
 
 for i in temple:
     pass
 
 for i in temple:
     print(*i)
+
+flag = False
 
 damagetime = 0
 pygame.mixer.music.play(-1)
@@ -93,8 +103,8 @@ while running:
     # Рендеринг
     screen.blit(roomimg, (0, 0))
     player.draw(screen)
-    mymy.draw(screen)
-    yasher.draw(screen)
+    for i in enemys:
+        i.draw(screen)
     if damagetime > 0:
         screen.blit(damageimage, (0, 0))
     pygame.display.update()
@@ -104,17 +114,18 @@ while running:
 
     # Обновление спрайтовw
     player.update(u, d, l, r, walls)
-    mymy.update(player.rect)
-    if mymy.checkolide(player.colliderect) and damagetime < 0:
-        player.hp -= 10
-        print(player.hp)
+    for i in enemys:
+        i.update(player.rect)
+        if i.checkolide(player.colliderect) and damagetime < 0:
+            if i.type == "mymia":
+                player.hp -= 10
+            else:
+                player.hp -= 5
+            print(player.hp)
+            flag = True
+    if flag == True:
         damagetime = 100
-
-    yasher.update(player.rect)
-    if yasher.checkolide(player.colliderect) and damagetime < 0:
-        player.hp -= 5
-        print(player.hp)
-        damagetime = 100
+        flag = False
 
     damagetime -= 1
 

@@ -16,6 +16,8 @@ class mymia(pygame.sprite.Sprite):
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
         self.hp = 100
+        self.type = "mymia"
+        print(self.image)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)

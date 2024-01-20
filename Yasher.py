@@ -12,23 +12,24 @@ class Yasher(pygame.sprite.Sprite):
         self.rect = pygame.Rect(x, y, 100, 100)
         self.xvel = 0
         self.yvel = 0
-        self.life = 5
+        self.life = 3
         self.colliderect = self.collideimage.get_rect()
         self.colliderect.topleft = (x + 28, y + 28)
         self.hp = 100
+        self.type = "yasher"
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
     def update(self, rectplayer):
         if rectplayer.y < self.rect.y:
-            self.yvel -= 1
+            self.yvel -= 2
         if rectplayer.y > self.rect.y:
-            self.yvel += 1
+            self.yvel += 2
         if rectplayer.x < self.rect.x:
-            self.xvel -= 1
+            self.xvel -= 2
         if rectplayer.x > self.rect.x:
-            self.xvel += 1
+            self.xvel += 2
         self.rect.x += self.xvel
         self.rect.y += self.yvel
         self.colliderect.x += self.xvel
