@@ -26,16 +26,16 @@ pygame.mixer.music.load("music.mp3")
 
 wall1 = pygame.image.load(f"image/Walls/Wall1.png")
 wallrect1 = wall1.get_rect()
-wallrect1.topleft = (0,0)
+wallrect1.topleft = (-20,-20)
 wall2 = pygame.image.load(f"image/Walls/Wall2.png")
 wallrect2 = wall2.get_rect()
-wallrect2.topleft = (0,0)
+wallrect2.topleft = (-20,-20)
 wall3 = pygame.image.load(f"image/Walls/Wall3.png")
 wallrect3 = wall3.get_rect()
-wallrect3.topleft = (778,0)
+wallrect3.topleft = (758,-20)
 wall4 = pygame.image.load(f"image/Walls/Wall4.png")
 wallrect4 = wall4.get_rect()
-wallrect4.topleft = (0,577)
+wallrect4.topleft = (-20,557)
 
 walls = [wallrect1, wallrect2, wallrect3, wallrect4]
 
