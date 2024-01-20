@@ -27,6 +27,12 @@ r = False
 d = False
 l = False
 
+temple = [[], [], [], [], [], [], [], [], []]
+
+for i in temple():
+
+
+print(temple)
 
 running = True
 while running:
